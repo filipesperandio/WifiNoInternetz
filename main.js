@@ -54,4 +54,5 @@ const main = () => {
   hazInternetz();
 };
 
+app.dock.hide();
 app.on("ready", main);
