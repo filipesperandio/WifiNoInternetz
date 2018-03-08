@@ -1,0 +1,15 @@
+{
+  "name": "WifiNoInternetz",
+  "version": "1.0.0",
+  "main": "main.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^1.8.3"
+  },
+  "dependencies": {
+    "fetch": "^1.1.0"
+  }
+}
