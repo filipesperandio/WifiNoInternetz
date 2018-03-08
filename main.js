@@ -1,15 +1,18 @@
 const { app, Tray, net, BrowserWindow, ipcMain, Menu } = require("electron");
 
-const success = "./green24.png";
-const failure = "./red24.png";
-const loading = "./loading24.png";
+const baseDir = process.env.APP_PATH || __dirname;
+const assetPath = (file) => `${baseDir}/${file}`;
+
+const success = assetPath("green24.png");
+const failure = assetPath("red24.png");
+const loading = assetPath("loading24.png");
 
 const CHECK_INTERVAL_MIN = 10;
 
 let tray = null;
 
 const connectivityEvents = () => {
-  const onlineStatusPage = `file:\/\/${__dirname}/online-status.html`;
+  const onlineStatusPage = assetPath("online-status.html");
   const onlineStatusWindow = new BrowserWindow({ width: 0, height: 0, show: false });
 
   onlineStatusWindow.loadURL(onlineStatusPage);
