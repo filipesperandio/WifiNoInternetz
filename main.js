@@ -1,4 +1,4 @@
-const { app, Tray, net, BrowserWindow, ipcMain } = require("electron");
+const { app, Tray, net, BrowserWindow, ipcMain, Menu } = require("electron");
 
 const success = "./green24.png";
 const failure = "./red24.png";
@@ -41,10 +41,17 @@ const processConnectivityChange = (_, online) => {
   }
 };
 
+const createMenu = () => {
+  const contextMenu = Menu.buildFromTemplate([
+    {label: 'Quit', click: () => app.quit()}
+  ])
+  tray.setContextMenu(contextMenu)
+};
+
 const main = () => {
   tray = new Tray(loading);
 
-  tray.on("click", hazInternetz);
+  createMenu();
   tray.on("right-click", hazInternetz);
 
   setInterval(hazInternetz, CHECK_INTERVAL_MIN * 60000);
