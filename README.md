@@ -7,6 +7,18 @@ Simple indicator to your connectivity status. Your wifi may be on, but do you ha
 ## How to run?
 
 ```shell
-yarn install
-yarn start
+make start
+```
+
+## How to package?
+
+```shell
+make package
+```
+
+### Optionally
+
+```shell
+make install
+make uninstall
 ```
