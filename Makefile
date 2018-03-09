@@ -1,8 +1,9 @@
 js = $(shell find . ! -path "./node_modules/*" ! -path "./tmp/*" -type f -name '*.js')
 html = $(shell find . ! -path "./node_modules/*" ! -path "./tmp/*" -type f -name '*.html')
 
+app_out_dir = tmp/WifiNoInternetz-darwin-x64
 app_name = WifiNoInternetz.app
-app_out = "tmp/WifiNoInternetz-darwin-x64/$(app_name)"
+app_out = "$(app_out_dir)/$(app_name)"
 
 node_modules: package.json
 	yarn install
@@ -29,8 +30,8 @@ uninstall:
 install: clean uninstall $(app_out)
 	cp -rf $(app_out) /Applications/
 
-tmp/$(app_name).dmg: $(app_out)
+tmp/$(app_name).pkg: $(app_out)
 	rm -f $@
-	electron-installer-dmg $(app_out) tmp/$(app_name) --overwrite --icon-size=150 --icon=orig/green.png
+	pkgbuild --root $(app_out_dir) --install-location /Applications --scripts ./scripts $@
 
-installer: tmp/$(app_name).dmg
+installer: tmp/$(app_name).pkg
