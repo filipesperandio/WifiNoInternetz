@@ -1,2 +1,3 @@
 theme: jekyll-theme-cayman
-show_downloads: true
+github:
+  pkg_url: https://github.com/filipesperandio/WifiNoInternetz/releases/download/1.0.1/WifiNoInternetz.app.pkg
