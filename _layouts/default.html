@@ -12,7 +12,7 @@
   <body>
     <section class="page-header">
       <h1 class="project-name">
-        <img src="https://github.com/filipesperandio/WifiNoInternetz/blob/1.0.1/orig/green.png?raw=true" style="width: 120px; vertical-align: middle; margin-right: 20px; margin-left: -20px;"/>
+        <img src="/WifiNoInternetz/orig/green.png" style="width: 120px; vertical-align: middle; margin-right: 20px; margin-left: -20px;"/>
         {{ site.title | default: site.github.repository_name }}
       </h1>
       <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
@@ -23,7 +23,13 @@
     </section>
 
     <section class="main-content">
-      {{ content }}
+      <p>Simple indicator to your connectivity status. Your wifi may be on, but do you haz internetz?</p>
+
+      <p style="text-align: center;">
+        <img src="/WifiNoInternetz/WifiNoInternetz.gif" alt="show-case">
+      </p>
+
+      <p>Only tested on MacOS Sierra, but may work on other platforms.</p>
 
       <footer class="site-footer">
         {% if site.github.is_project_page %}
