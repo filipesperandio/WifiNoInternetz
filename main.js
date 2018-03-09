@@ -15,7 +15,7 @@ const connectivityEvents = () => {
   const onlineStatusPage = assetPath("online-status.html");
   const onlineStatusWindow = new BrowserWindow({ width: 0, height: 0, show: false });
 
-  onlineStatusWindow.loadURL(onlineStatusPage);
+  onlineStatusWindow.loadURL(`file:\/\/${onlineStatusPage}`);
 
   return "online-status-changed";
 };
