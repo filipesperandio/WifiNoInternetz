@@ -3,12 +3,9 @@
   "version": "1.0.0",
   "main": "main.js",
   "license": "MIT",
-  "scripts": {
-    "start": "electron .",
-    "package": "electron-packager ./ --platform=darwin --arch=x64 --out=out --icon=./icon.icns --overwrite"
-  },
   "devDependencies": {
     "electron": "^1.8.3",
+    "electron-installer-dmg": "^0.2.1",
     "electron-packager": "^11.1.0"
   }
 }
