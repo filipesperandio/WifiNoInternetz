@@ -1,5 +1,60 @@
 const { app, Tray, net, BrowserWindow, ipcMain, Menu } = require("electron");
 
+// Windows Setup
+if (checkWindowsSetup()) {
+  // squirrel event handled and app will exit in 1000ms, so don't do anything else
+  return;
+}
+
+function checkWindowsSetup() {
+  if (process.argv.length === 1) {
+    return false;
+  }
+
+  const ChildProcess = require('child_process');
+  const path = require('path');
+
+  const appFolder = path.resolve(process.execPath, '..');
+  const rootAtomFolder = path.resolve(appFolder, '..');
+  const updateDotExe = path.resolve(path.join(rootAtomFolder, 'Update.exe'));
+  const exeName = path.basename(process.execPath);
+
+  const spawn = function(command, args) {
+    let spawnedProcess, error;
+
+    try {
+      spawnedProcess = ChildProcess.spawn(command, args, {detached: true});
+    } catch (error) {}
+
+    return spawnedProcess;
+  };
+
+  const spawnUpdate = function(args) {
+    return spawn(updateDotExe, args);
+  };
+
+  const squirrelEvent = process.argv[1];
+  switch (squirrelEvent) {
+    case '--squirrel-install':
+    case '--squirrel-updated':
+      spawnUpdate(['--createShortcut', exeName]);
+      setTimeout(app.quit, 1000);
+      return true;
+
+    case '--squirrel-uninstall':
+      spawnUpdate(['--removeShortcut', exeName]);
+      setTimeout(app.quit, 1000);
+      return true;
+
+    case '--squirrel-obsolete':
+      app.quit();
+      return true;
+  }
+};
+
+
+// Main
+
 const baseDir = process.env.APP_PATH || __dirname;
 const assetPath = (file) => `${baseDir}/${file}`;
 
@@ -64,5 +119,5 @@ const main = () => {
   hazInternetz();
 };
 
-app.dock.hide();
+app.dock && app.dock.hide();
 app.on("ready", main);
